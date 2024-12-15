@@ -12,7 +12,7 @@ class SchoolController extends Controller
 {
     public function index()
     {
-        return UserResource::collection(School::all());
+        return response()->json(['data' => School::all()]);
     }
 
     public function show($id)
