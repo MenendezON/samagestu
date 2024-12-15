@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
+use App\Models\School;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -15,12 +16,24 @@ class AuthController extends Controller
     public function signup(SignupRequest $request)
     {
         $data = $request->validated();
+
+        /** @var \App\Models\School $school */ 
+        $school = School::create([
+            'name' => $data['name'],
+            'phone' => $data['phone'],
+        ]);
+
         /** @var \App\Models\User $user */
         $user = User::create([
-            'name' => $data['name'],
+            'name' => 'Default User',
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'school_id' => $school->id,
         ]);
+
+        if (!$school || !$user) {
+            return response()->json(['error' => 'Failed to create school or user'], 500);
+        }
 
         $token = $user->createToken('main')->plainTextToken;
         return response(compact('user', 'token'));

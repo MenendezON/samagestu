@@ -27,11 +27,19 @@ export default function DefaultLayout() {
       })
   }, [])
 
+  // useEffect(() => {
+  //   axiosClient.get('/students')
+  //     .then(({data}) => {
+  //        setStudent(data)
+  //     })
+  // }, [])
+
   return (
     <div id="defaultLayout">
       <aside>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/users">Users</Link>
+        <Link to="/students">Students</Link>
       </aside>
       <div className="content">
         <header>

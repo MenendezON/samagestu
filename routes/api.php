@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ClassroomController;
 use App\Http\Controllers\Api\GradeController;
+use App\Http\Controllers\Api\PersonnelController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\SchoolController;
@@ -32,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/classrooms', ClassroomController::class);
     Route::apiResource('/students', StudentController::class);
     Route::apiResource('/grades', GradeController::class);
+    Route::apiResource('/personnels', PersonnelController::class);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

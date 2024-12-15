@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Support\Str;
 
-class School extends Model
+class Personnel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'address', 'email', 'phone'];
+    protected $fillable = ['full_name','avatar','phone','date_join','email'];
 
     protected $keyType = 'string';
     public $incrementing = false;

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->uuid('school_id')->nullable()->after('id');
+            $table->uuid('school_id')->after('id');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
         });
     }
