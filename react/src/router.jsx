@@ -9,13 +9,41 @@ import Users from "./views/Users";
 import UserForm from "./views/UserForm";
 import Students from "./views/Students";
 import StudentForm from "./views/StudentForm";
+import Classes from "./views/Classes.jsx";
+import ClassForm from "./views/ClassForm.jsx";
+import Teachers from "./views/Teacher.jsx";
+import TeacherForm from "./views/TeacherForm.jsx";
 
 const router = createBrowserRouter([
   {
     path: '/', element: <DefaultLayout />, children: [
       { 
         path: '/',
-        element: <Navigate to="/users" /> 
+        element: <Navigate to="/dashboard" /> 
+      },
+      { 
+        path: '/classes',
+        element: <Classes /> 
+      },
+      { 
+        path: '/classes/new',
+        element: <ClassForm key="classCreate" /> 
+      },
+      { 
+        path: '/classes/:id',
+        element: <ClassForm key="classUpdate" /> 
+      },
+      { 
+        path: '/teachers',
+        element: <Teachers /> 
+      },
+      { 
+        path: '/teachers/new',
+        element: <TeacherForm key="teacherCreate" /> 
+      },
+      { 
+        path: '/teachers/:id',
+        element: <TeacherForm key="teacherUpdate" /> 
       },
       {
         path: '/dashboard',

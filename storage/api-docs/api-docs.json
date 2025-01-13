@@ -1,0 +1,250 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IMAREB API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/signup": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User signup",
+                "description": "Authenticate a user and return a token",
+                "operationId": "f886d970a4e3497817841e1dc8ca2348",
+                "parameters": [
+                    {
+                        "name": "Name",
+                        "in": "query",
+                        "description": "Provide the company name",
+                        "required": true
+                    },
+                    {
+                        "name": "Email",
+                        "in": "query",
+                        "description": "Provide the admin email",
+                        "required": true
+                    },
+                    {
+                        "name": "Password",
+                        "in": "query",
+                        "description": "Provide the admin password",
+                        "required": true
+                    },
+                    {
+                        "name": "Password_confirmation",
+                        "in": "query",
+                        "description": "Confirm the admin password",
+                        "required": false
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Company name"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "kykyponke@mailinator.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "cleante@1957"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "cleante@1957"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User login",
+                "description": "Authenticate a user and return a token",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "kykyponike@mailinator.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "cleante@1957"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/personnels": {
+            "get": {
+                "tags": [
+                    "Personnel"
+                ],
+                "summary": "Get all personnels",
+                "description": "This endpoint requires a valid Bearer token",
+                "operationId": "fba07307892e6ea5abed0a23bedf4600",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/schools": {
+            "get": {
+                "tags": [
+                    "Personnel"
+                ],
+                "summary": "Get all schools",
+                "description": "This endpoint requires a valid Bearer token",
+                "operationId": "ca27f206450153531c9da4459c02d0b3",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        },
+        {
+            "name": "Personnel",
+            "description": "Personnel"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Enter your Bearer token in the Authorization header"
+            }
+        }
+    },
+    "security": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+        }
+    }
+}

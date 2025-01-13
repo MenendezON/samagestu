@@ -24,16 +24,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        $user = $request->user()->load('school');
+        return response()->json(['data' => $user]);
     });
 
     Route::apiResource('/users', UserController::class);
 
     Route::apiResource('/schools', SchoolController::class);
-    Route::apiResource('/classrooms', ClassroomController::class);
+    Route::apiResource('/classes', ClassroomController::class);
     Route::apiResource('/students', StudentController::class);
     Route::apiResource('/grades', GradeController::class);
-    Route::apiResource('/personnels', PersonnelController::class);
+    Route::apiResource('/teachers', PersonnelController::class);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

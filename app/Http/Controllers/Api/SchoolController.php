@@ -10,6 +10,24 @@ use App\Http\Resources\UserResource;
 
 class SchoolController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/schools",
+     *     summary="Get all schools",
+     *     description="This endpoint requires a valid Bearer token",
+     *     security={{"bearerAuth": {}}},  
+     *     tags={"School"},     
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(type="object", @OA\Property(property="data", type="string"))
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     )
+     * )
+     */
     public function index()
     {
         return response()->json(['data' => School::all()]);
