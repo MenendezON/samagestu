@@ -25,9 +25,9 @@ class Personnel extends Model
         });
     }
 
-    public function Classrooms()
+    public function classrooms()
     {
-        return $this->hasMany(Classroom::class);
+        return $this->hasMany(Classroom::class, 'class_id', 'id');
     }
 
     public function School()

@@ -33,6 +33,7 @@ export default function DefaultLayout() {
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/classes">All Classes</Link>
         <Link to="/teachers">All Teachers</Link>
+        <Link to="/subjects">All Subjects</Link>
         <Link to="/students">All Students</Link>
         <Link to="/users">Users</Link>
       </aside>

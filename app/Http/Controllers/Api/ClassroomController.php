@@ -28,11 +28,21 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        // Fetch classrooms with personnel names
-        $classrooms = Classroom::with('personnel')->get();
+        // Fetch classrooms with personnel and count the students
+        $classrooms = Classroom::with('personnel')->withCount([
+            'students as male_students_count' => function ($query) {
+                $query->where('gender', 'male');
+            },
+            'students as female_students_count' => function ($query) {
+                $query->where('gender', 'female');
+            }
+        ])->get();
+        //$classrooms = Classroom::with(['personnel:id,full_name', 'students:id,class_id'])->get();
+
 
         return response()->json(['data' => $classrooms]);
     }
+
 
     public function show($id)
     {

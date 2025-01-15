@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('full_name');
-            $table->string('avatar');
-            $table->date('date_of_admission');
-            $table->string('gender')->default('Masculin');         
+            $table->string('avatar')->default('default.jpg') ;
+            $table->string('matricule')->unique();
+            $table->date('admission');
+            $table->string('gender')->default('male');         
             $table->uuid('class_id');
             $table->foreign('class_id')->references('id')->on('classrooms');           
             $table->date('date_of_birth');
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('previous_school');
             $table->char('blood_group'); 
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

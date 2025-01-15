@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\PersonnelController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\SchoolController;
+use App\Http\Controllers\Api\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/schools', SchoolController::class);
     Route::apiResource('/classes', ClassroomController::class);
     Route::apiResource('/students', StudentController::class);
-    Route::apiResource('/grades', GradeController::class);
+    Route::apiResource('/subjects', SubjectController::class);
     Route::apiResource('/teachers', PersonnelController::class);
 });
 

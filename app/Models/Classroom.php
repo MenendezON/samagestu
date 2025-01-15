@@ -29,4 +29,14 @@ class Classroom extends Model
     {
         return $this->belongsTo(Personnel::class);
     }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'class_id');
+    }
 }

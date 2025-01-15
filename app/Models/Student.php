@@ -10,7 +10,7 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'class_id', 'school_id'];
+    protected $fillable = ['full_name', 'avatar', 'matricule', 'admission', 'gender', 'class_id', 'date_of_birth', 'place_of_birth', 'discount', 'nationality', 'address', 'city', 'email', 'phone', 'previous_school', 'blood_group', 'observation'];
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -27,11 +27,12 @@ class Student extends Model
 
     public function classroom()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsTo(Classroom::class, 'class_id', 'id');
     }
 
     public function school()
     {
         return $this->belongsTo(School::class);
     }
+
 }

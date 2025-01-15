@@ -9,8 +9,8 @@ export default function ClassForm() {
   const [classes, setClass] = useState({
     id: null,
     name: '',
-    fees: '',
-    capacity: '',
+    fees: 0,
+    capacity: 0,
     personnel_id: '',
   })
   const [personnels, setPersonnels] = useState([])

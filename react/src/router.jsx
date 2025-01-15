@@ -11,6 +11,8 @@ import Students from "./views/Students";
 import StudentForm from "./views/StudentForm";
 import Classes from "./views/Classes.jsx";
 import ClassForm from "./views/ClassForm.jsx";
+import Subjects from "./views/Subjects.jsx";
+import SubjectForm from "./views/SubjectForm.jsx";
 import Teachers from "./views/Teacher.jsx";
 import TeacherForm from "./views/TeacherForm.jsx";
 
@@ -44,6 +46,18 @@ const router = createBrowserRouter([
       { 
         path: '/teachers/:id',
         element: <TeacherForm key="teacherUpdate" /> 
+      },
+      { 
+        path: '/subjects',
+        element: <Subjects /> 
+      },
+      { 
+        path: '/subjects/new',
+        element: <SubjectForm key="subjectCreate" /> 
+      },
+      { 
+        path: '/subjects/:id',
+        element: <SubjectForm key="subjectUpdate" /> 
       },
       {
         path: '/dashboard',
