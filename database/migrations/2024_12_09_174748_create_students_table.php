@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('full_name');
-            $table->string('avatar')->default('default.jpg') ;
+            $table->string('avatar')->nullable();;
             $table->string('matricule')->unique();
             $table->date('admission');
             $table->string('gender')->default('male');         
