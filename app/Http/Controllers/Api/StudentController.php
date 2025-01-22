@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -23,21 +24,73 @@ class StudentController extends Controller
         return response()->json(['data' => $student]);
     }
 
-    public function store(Request $request)
-    {
-        $student = Student::create($request->all());
+    // public function store(Request $request)
+    // {
+    //     $student = Student::create($request->all());
 
-        return response()->json($student, 201);
+    //     return response()->json($student, 201);
+    // }
+
+    // public function update(Request $request, $id)
+    // {
+    //     $student = Student::findOrFail($id);
+
+    //     $student->update($request->all());
+
+    //     return response()->json($student, 200);
+    // }
+
+public function store(Request $request)
+{
+    $request->validate([
+        'full_name' => 'required|string|max:255',
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate avatar
+        // Add other validations as needed
+    ]);
+
+    $data = $request->all();
+
+    // Handle file upload
+    if ($request->hasFile('avatar')) {
+        $file = $request->file('avatar');
+        $path = $file->store('avatars', 'public'); // Save to storage/app/public/avatars
+        $data['avatar'] = $path; // Save the file path to the database
     }
 
-    public function update(Request $request, $id)
-    {
-        $student = Student::findOrFail($id);
+    $student = Student::create($data);
 
-        $student->update($request->all());
+    return response()->json($student, 201);
+}
 
-        return response()->json($student, 200);
+public function update(Request $request, $id)
+{
+    $student = Student::findOrFail($id);
+
+    $request->validate([
+        'full_name' => 'required|string|max:255',
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate avatar
+        // Add other validations as needed
+    ]);
+
+    $data = $request->all();
+
+    // Handle file upload
+    if ($request->hasFile('avatar')) {
+        // Delete old avatar if it exists
+        if ($student->avatar) {
+            Storage::disk('public')->delete($student->avatar);
+        }
+
+        $file = $request->file('avatar');
+        $path = $file->store('avatars', 'public');
+        $data['avatar'] = $path;
     }
+
+    $student->update($data);
+
+    return response()->json($student, 200);
+}
+
 
     public function destroy($id)
     {
