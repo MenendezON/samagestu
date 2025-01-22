@@ -3,6 +3,7 @@ import axiosClient from "../axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider.jsx";
 import loadingbar from "../assets/images/loading.gif";
+import defaultAvatar from "../assets/images/default-avatar.png";
 
 export default function Students() {
   const [students, setStudents] = useState([]);
@@ -95,6 +96,7 @@ export default function Students() {
             <tr>
               <th>Matricule</th>
               <th>Student name</th>
+              <th>Genre</th>
               <th>Class</th>
               <th>Phone</th>
               <th>Discount</th>
@@ -115,6 +117,9 @@ export default function Students() {
             <tbody>
               {filteredStudents.map((u) => (
                 <tr key={u.id}>
+                  <td>
+                    <img height="50" src={u.avatar ? `${import.meta.env.VITE_API_BASE_URL}/storage/${u.avatar}` : defaultAvatar} alt="Student Avatar" />
+                  </td>
                   <td>
                     <Link to={`/students/${u.id}`}>{u.full_name}</Link>
                   </td>
